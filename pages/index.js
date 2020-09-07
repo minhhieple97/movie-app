@@ -5,7 +5,9 @@ import SideMenu from "../components/SideMenu";
 import Carousel from "../components/Carousel";
 import MovieList from "../components/MovieList";
 import Footer from "../components/Footer";
+import { getMovies } from "../actions";
 export default function Home() {
+  const MOVIES_DATA = getMovies();
   return (
     <div>
       <Head>
@@ -37,18 +39,18 @@ export default function Home() {
         <div className="container">
           <div className="row">
             <div className="col-lg-3">
-              <SideMenu></SideMenu>
+              <SideMenu />
             </div>
             <div className="col-lg-9">
               <Carousel></Carousel>
               <div className="row">
-                <MovieList></MovieList>
+                <MovieList movies={MOVIES_DATA} />
               </div>
             </div>
           </div>
         </div>
       </div>
-      <Footer></Footer>
+      <Footer />
       <style jsx>
         {`
           .home-page {
