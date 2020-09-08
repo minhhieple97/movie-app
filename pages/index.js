@@ -1,17 +1,15 @@
 import Head from "next/head"
 import styles from "../styles/Home.module.css"
-import Navbar from "../components/Navbar"
-import SideMenu from "../components/SideMenu"
-import Carousel from "../components/Carousel"
-import MovieList from "../components/MovieList"
-import Footer from "../components/Footer"
+import Navbar from "../components/navbar"
+import SideMenu from "../components/sideMenu"
+import Carousel from "../components/carousel"
+import MovieList from "../components/movieList"
+import Footer from "../components/footer"
 import { getMovies } from "../actions"
-import { useState } from "react"
-export default function Home() {
-  const [movies, setMovies] = useState([])
-  getMovies().then((data) => {
-    setMovies(data)
-  })
+import { useState, useEffect } from "react"
+export default function Home(props) {
+  console.log({ props })
+  const { movies } = props
   return (
     <div>
       <Head>
@@ -48,20 +46,25 @@ export default function Home() {
             <div className="col-lg-9">
               <Carousel></Carousel>
               <div className="row">
-                <MovieList movies={movies} />
+                {/* {err && (
+                  <div className="alert alert-danger" role="alert">
+                    {err}
+                  </div>
+                )} */}
+                <MovieList movies={movies || []} />
               </div>
             </div>
           </div>
         </div>
       </div>
-      <Footer />
-      <style jsx>
-        {`
-          .home-page {
-            padding-top: 80px;
-          }
-        `}
-      </style>
     </div>
   )
+}
+Home.getInitialProps = async () => {
+  try {
+    const movies = await getMovies()
+    return { movies }
+  } catch (error) {
+    console.log(error)
+  }
 }
