@@ -32,9 +32,17 @@ const MOVIES_DATA = [
     image:
       "https://img.cinemablend.com/filter:scale/quill/0/f/5/2/a/6/0f52a6843a25c1a5c1f9a0c00548cad9e1d912e2.jpg?mw=600",
   },
-]
+];
 export const getMovies = () => {
   return new Promise((res, rej) => {
-    setTimeout(res, 2000, MOVIES_DATA)
-  })
-}
+    setTimeout(res, 2000, MOVIES_DATA);
+  });
+};
+
+export const getMovieById = (id) => {
+  return new Promise((res, rej) => {
+    const movieIndex = MOVIES_DATA.findIndex((el) => el.id === id);
+    const movie = MOVIES_DATA[movieIndex];
+    setTimeout(res, 1000, movie);
+  });
+};

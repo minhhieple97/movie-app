@@ -1,12 +1,16 @@
-import React, { Component } from "react"
-import App from "next/app"
-import Head from "next/head"
-import Navbar from "../components/navbar"
-import Footer from "../components/footer"
+import React, { Component } from "react";
+import App from "next/app";
+import Head from "next/head";
+import Navbar from "../components/navbar";
+import Footer from "../components/footer";
 export default class MovieApp extends App {
+  static async getInitialProps(appContext) {
+    console.log("Calling getInitialProps from _app.js");
+    const appProps = await App.getInitialProps(appContext);
+    return { ...appProps };
+  }
   render() {
-    console.log({ propsComponent: this.props })
-    const { Component } = this.props
+    const { Component, pageProps } = this.props;
     return (
       <div>
         <Head>
@@ -35,7 +39,7 @@ export default class MovieApp extends App {
         </Head>
         <Navbar />
         <div className="base-page">
-          <Component testProps={"OOKOK"} />
+          <Component {...pageProps} />
         </div>
         <Footer />
         <style jsx>
@@ -46,6 +50,6 @@ export default class MovieApp extends App {
           `}
         </style>
       </div>
-    )
+    );
   }
 }

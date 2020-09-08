@@ -1,15 +1,14 @@
-import Head from "next/head"
-import styles from "../styles/Home.module.css"
-import Navbar from "../components/navbar"
-import SideMenu from "../components/sideMenu"
-import Carousel from "../components/carousel"
-import MovieList from "../components/movieList"
-import Footer from "../components/footer"
-import { getMovies } from "../actions"
-import { useState, useEffect } from "react"
+import Head from "next/head";
+import styles from "../styles/Home.module.css";
+import Navbar from "../components/navbar";
+import SideMenu from "../components/sideMenu";
+import Carousel from "../components/carousel";
+import MovieList from "../components/movieList";
+import Footer from "../components/footer";
+import { getMovies } from "../actions";
+import { useState, useEffect } from "react";
 export default function Home(props) {
-  console.log({ props })
-  const { movies } = props
+  const { movies } = props;
   return (
     <div>
       <Head>
@@ -58,13 +57,13 @@ export default function Home(props) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 Home.getInitialProps = async () => {
   try {
-    const movies = await getMovies()
-    return { movies }
+    const movies = await getMovies();
+    return { movies };
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};
