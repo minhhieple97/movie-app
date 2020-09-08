@@ -1,13 +1,17 @@
-import Head from "next/head";
-import styles from "../styles/Home.module.css";
-import Navbar from "../components/Navbar";
-import SideMenu from "../components/SideMenu";
-import Carousel from "../components/Carousel";
-import MovieList from "../components/MovieList";
-import Footer from "../components/Footer";
-import { getMovies } from "../actions";
+import Head from "next/head"
+import styles from "../styles/Home.module.css"
+import Navbar from "../components/Navbar"
+import SideMenu from "../components/SideMenu"
+import Carousel from "../components/Carousel"
+import MovieList from "../components/MovieList"
+import Footer from "../components/Footer"
+import { getMovies } from "../actions"
+import { useState } from "react"
 export default function Home() {
-  const MOVIES_DATA = getMovies();
+  const [movies, setMovies] = useState([])
+  getMovies().then((data) => {
+    setMovies(data)
+  })
   return (
     <div>
       <Head>
@@ -44,7 +48,7 @@ export default function Home() {
             <div className="col-lg-9">
               <Carousel></Carousel>
               <div className="row">
-                <MovieList movies={MOVIES_DATA} />
+                <MovieList movies={movies} />
               </div>
             </div>
           </div>
@@ -59,5 +63,5 @@ export default function Home() {
         `}
       </style>
     </div>
-  );
+  )
 }
