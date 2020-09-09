@@ -1,14 +1,15 @@
-import Head from "next/head";
-import styles from "../styles/Home.module.css";
-import Navbar from "../components/navbar";
-import SideMenu from "../components/sideMenu";
-import Carousel from "../components/carousel";
-import MovieList from "../components/movieList";
-import Footer from "../components/footer";
-import { getMovies } from "../actions";
-import { useState, useEffect } from "react";
+import Head from "next/head"
+import styles from "../styles/Home.module.css"
+import Navbar from "../components/navbar"
+import SideMenu from "../components/sideMenu"
+import Carousel from "../components/carousel"
+import MovieList from "../components/movieList"
+import Footer from "../components/footer"
+import { getMovies, getCategories } from "../actions"
+import { useState, useEffect } from "react"
+import Modal from "../components/modal"
 export default function Home(props) {
-  const { movies } = props;
+  const { movies, images, categories } = props
   return (
     <div>
       <Head>
@@ -40,16 +41,12 @@ export default function Home(props) {
         <div className="container">
           <div className="row">
             <div className="col-lg-3">
-              <SideMenu />
+              <Modal></Modal>
+              <SideMenu categories={categories} />
             </div>
             <div className="col-lg-9">
-              <Carousel></Carousel>
+              <Carousel images={images}></Carousel>
               <div className="row">
-                {/* {err && (
-                  <div className="alert alert-danger" role="alert">
-                    {err}
-                  </div>
-                )} */}
                 <MovieList movies={movies || []} />
               </div>
             </div>
@@ -57,13 +54,22 @@ export default function Home(props) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 Home.getInitialProps = async () => {
   try {
-    const movies = await getMovies();
-    return { movies };
+    const [movies, categories] = await Promise.all([
+      getMovies(),
+      getCategories(),
+    ])
+    const images = movies.map((el) => ({
+      id: `image-${el.id}`,
+      url: el.image,
+      name: el.name,
+      cover: el.cover,
+    }))
+    return { movies, images, categories }
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
-};
+}
