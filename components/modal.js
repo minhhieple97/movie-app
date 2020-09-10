@@ -1,6 +1,7 @@
 import React from "react"
+import MovieCreateForm from "./movieCreateForm"
 
-export default function Modal() {
+export default function Modal(props) {
   let closeButton = null
   const submitModal = () => {
     alert("Submititng Modal")
@@ -40,7 +41,7 @@ export default function Modal() {
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div className="modal-body">...</div>
+            <div className="modal-body">{props.children()}</div>
             <div className="modal-footer">
               <button
                 ref={(ele) => (closeButton = ele)}

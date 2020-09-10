@@ -41,7 +41,6 @@ export default function Home(props) {
         <div className="container">
           <div className="row">
             <div className="col-lg-3">
-              <Modal></Modal>
               <SideMenu categories={categories} />
             </div>
             <div className="col-lg-9">
