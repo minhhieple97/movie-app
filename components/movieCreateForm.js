@@ -1,6 +1,6 @@
-import { useState } from "react"
+import { useState } from "react";
 
-const MovieCreateForm = () => {
+const MovieCreateForm = (props) => {
   const [form, setForm] = useState({
     name: "some movie",
     releaseYear: "some movie",
@@ -10,12 +10,30 @@ const MovieCreateForm = () => {
     image: "some image",
     cover: "some cover",
     longDescription: "some longDescription",
-  })
+  });
   const handleChange = (event) => {
-    const target = event.target
-    setForm({ ...form, [target.name]: target.value })
-  }
-  const handleGenreChange = (event) => {}
+    const target = event.target;
+    setForm({ ...form, [target.name]: target.value });
+  };
+  const handleGenreChange = (event) => {
+    const { options } = event.target;
+    const value = [];
+    const optionsLength = options.length;
+    for (let i = 0; i < optionsLength; i++) {
+      if (options[i].selected) {
+        value.push(options[i].value);
+      }
+    }
+    setForm({
+      ...form,
+      genre: value.toString(),
+    });
+  };
+
+  const submitForm = () => {
+    props.handleCreateMovie({ ...form });
+  };
+
   return (
     <form>
       <div className="form-group">
@@ -111,8 +129,11 @@ const MovieCreateForm = () => {
           <option>action</option>
         </select>
       </div>
+      <button onClick={submitForm} type="button" className="btn btn-primary">
+        Create
+      </button>
     </form>
-  )
-}
+  );
+};
 
-export default MovieCreateForm
+export default MovieCreateForm;

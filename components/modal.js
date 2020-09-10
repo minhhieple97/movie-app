@@ -1,12 +1,10 @@
-import React from "react"
-import MovieCreateForm from "./movieCreateForm"
-
+import React from "react";
 export default function Modal(props) {
-  let closeButton = null
+  let closeButton = null;
   const submitModal = () => {
-    alert("Submititng Modal")
-    closeButton.click()
-  }
+    alert("Submititng Modal");
+    closeButton.click();
+  };
   return (
     <div>
       <button
@@ -51,17 +49,20 @@ export default function Modal(props) {
               >
                 Close
               </button>
-              <button
+              {
+               props.hasSubmit &&  <button
                 onClick={submitModal}
                 type="button"
                 className="btn btn-primary"
               >
                 Save changes
               </button>
+              }
+             
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -45,30 +45,37 @@ const MOVIES_DATA = [
     longDescription:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In tellus lectus, placerat et elementum a, euismod quis diam. Suspendisse potenti. Ut dignissim nulla a bibendum tincidunt. Nulla nibh urna, tempus id tincidunt sit amet, euismod at ipsum. Maecenas quis elit cursus, iaculis augue aliquet, ultrices enim. Phasellus quis pellentesque lorem. Phasellus pharetra pulvinar est. Aenean fermentum lacus eu mi mattis efficitur. Nam efficitur lorem ac quam bibendum, fringilla scelerisque nisl volutpat. Praesent sodales justo sed porta feugiat. Nunc ultrices, mauris sit amet laoreet finibus, odio erat blandit risus, non dignissim mauris libero vitae erat. Nulla suscipit neque nisi, varius sollicitudin dui blandit a. Mauris vitae rutrum nisi. Sed lacus purus, aliquam ac dictum fermentum, ullamcorper id dolor.",
   },
-]
+];
 const CATEGORY_DATA = [
   { id: "1", name: "drama" },
   { id: "2", name: "action" },
   { id: "3", name: "adventure" },
   { id: "4", name: "fantasy" },
   { id: "5", name: "historical" },
-]
+];
 export const getMovies = () => {
   return new Promise((res, rej) => {
-    setTimeout(res, 2000, MOVIES_DATA)
-  })
-}
+    setTimeout(res, 2000, MOVIES_DATA);
+  });
+};
 
 export const getCategories = () => {
   return new Promise((res, rej) => {
-    setTimeout(res, 2000, CATEGORY_DATA)
-  })
-}
+    setTimeout(res, 2000, CATEGORY_DATA);
+  });
+};
 
 export const getMovieById = (id) => {
   return new Promise((res, rej) => {
-    const movieIndex = MOVIES_DATA.findIndex((el) => el.id === id)
-    const movie = MOVIES_DATA[movieIndex]
-    setTimeout(res, 1000, movie)
-  })
-}
+    const movieIndex = MOVIES_DATA.findIndex((el) => el.id === id);
+    const movie = MOVIES_DATA[movieIndex];
+    setTimeout(res, 1000, movie);
+  });
+};
+
+export const createMovie = (movie) => {
+  return new Promise((res, rej) => {
+    MOVIES_DATA.push(movie);
+    setTimeout(res, 1000, MOVIES_DATA);
+  });
+};
