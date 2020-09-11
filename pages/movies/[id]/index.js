@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import { useRouter } from "next/router"
-import { getMovieById, deleteMovie } from "../../actions"
+import { getMovieById, deleteMovie } from "../../../actions"
 export default function Movie(props) {
   const router = useRouter()
   const { movie } = props

@@ -11,7 +11,7 @@ import Modal from "../components/modal"
 export default function Home(props) {
   const { movies, images, categories } = props
   return (
-    <div>
+  <div>
       <Head>
         <title>Home</title>
         <link

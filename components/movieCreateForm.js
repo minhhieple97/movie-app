@@ -1,38 +1,38 @@
-import { useState } from "react";
+import { useState } from "react"
 
 const MovieCreateForm = (props) => {
   const [form, setForm] = useState({
-    name: "some movie",
-    releaseYear: "some movie",
-    description: "some description",
-    rating: "some rating",
-    genre: "some genre",
-    image: "some image",
-    cover: "some cover",
-    longDescription: "some longDescription",
-  });
+    name: "",
+    releaseYear: "",
+    description: "",
+    rating: "",
+    genre: "",
+    image: "",
+    cover: "",
+    longDesc: "",
+  })
   const handleChange = (event) => {
-    const target = event.target;
-    setForm({ ...form, [target.name]: target.value });
-  };
+    const target = event.target
+    setForm({ ...form, [target.name]: target.value })
+  }
   const handleGenreChange = (event) => {
-    const { options } = event.target;
-    const value = [];
-    const optionsLength = options.length;
+    const { options } = event.target
+    const value = []
+    const optionsLength = options.length
     for (let i = 0; i < optionsLength; i++) {
       if (options[i].selected) {
-        value.push(options[i].value);
+        value.push(options[i].value)
       }
     }
     setForm({
       ...form,
       genre: value.toString(),
-    });
-  };
+    })
+  }
 
   const submitForm = () => {
-    props.handleCreateMovie({ ...form });
-  };
+    props.handleCreateMovie({ ...form })
+  }
 
   return (
     <form>
@@ -107,10 +107,10 @@ const MovieCreateForm = (props) => {
         <textarea
           onChange={handleChange}
           className="form-control"
-          id="longDescription"
-          name="longDescription"
+          id="longDesc"
+          name="longDesc"
           rows="3"
-          value={form.longDescription}
+          value={form.longDesc}
         ></textarea>
       </div>
       <div className="form-group">
@@ -133,7 +133,7 @@ const MovieCreateForm = (props) => {
         Create
       </button>
     </form>
-  );
-};
+  )
+}
 
-export default MovieCreateForm;
+export default MovieCreateForm
