@@ -1,6 +1,7 @@
-import { useState } from "react"
+import { useEffect, useState } from "react";
 
 const MovieCreateForm = (props) => {
+  const [isInitialDataLoaded, setIsInitialDataLoaded] = useState(false);
   const [form, setForm] = useState({
     name: "",
     releaseYear: "",
@@ -10,29 +11,35 @@ const MovieCreateForm = (props) => {
     image: "",
     cover: "",
     longDesc: "",
-  })
+  });
+  useEffect(() => {
+    if (props.initialData) {
+      setForm(props.initialData);
+      setIsInitialDataLoaded(true);
+    }
+  }, [isInitialDataLoaded]);
   const handleChange = (event) => {
-    const target = event.target
-    setForm({ ...form, [target.name]: target.value })
-  }
+    const target = event.target;
+    setForm({ ...form, [target.name]: target.value });
+  };
   const handleGenreChange = (event) => {
-    const { options } = event.target
-    const value = []
-    const optionsLength = options.length
+    const { options } = event.target;
+    const value = [];
+    const optionsLength = options.length;
     for (let i = 0; i < optionsLength; i++) {
       if (options[i].selected) {
-        value.push(options[i].value)
+        value.push(options[i].value);
       }
     }
     setForm({
       ...form,
       genre: value.toString(),
-    })
-  }
+    });
+  };
 
   const submitForm = () => {
-    props.handleCreateMovie({ ...form })
-  }
+    props.handleCreateMovie({ ...form });
+  };
 
   return (
     <form>
@@ -133,7 +140,7 @@ const MovieCreateForm = (props) => {
         Create
       </button>
     </form>
-  )
-}
+  );
+};
 
-export default MovieCreateForm
+export default MovieCreateForm;
