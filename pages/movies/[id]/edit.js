@@ -7,7 +7,6 @@ export default class edit extends Component {
     const movie = await getMovieById(query.id);
     return { movie };
   }
-
   render() {
     const { movie } = this.props;
     return (

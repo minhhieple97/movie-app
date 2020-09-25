@@ -1,6 +1,15 @@
 import { useEffect, useState } from "react";
-
 const MovieCreateForm = (props) => {
+  const defaultFormData = {
+    name: "",
+    releaseYear: "",
+    description: "",
+    rating: "",
+    genre: "",
+    image: "",
+    cover: "",
+    longDesc: "",
+  };
   const [isInitialDataLoaded, setIsInitialDataLoaded] = useState(false);
   const [form, setForm] = useState({
     name: "",

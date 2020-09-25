@@ -1,14 +1,14 @@
-import React, { useEffect } from "react"
-import { useRouter } from "next/router"
-import { getMovieById, deleteMovie } from "../../../actions"
+import React, { useEffect } from "react";
+import { useRouter } from "next/router";
+import { getMovieById, deleteMovie } from "../../../actions";
 export default function Movie(props) {
-  const router = useRouter()
-  const { movie } = props
+  const router = useRouter();
+  const { movie } = props;
   const handleDeleteMovie = (id) => {
     deleteMovie(id).then(() => {
-      router.push("/")
-    })
-  }
+      router.push("/");
+    });
+  };
   return (
     <div className="container">
       <div className="jumbotron">
@@ -26,11 +26,19 @@ export default function Movie(props) {
           </button>
           <button
             onClick={handleDeleteMovie.bind(null, movie.id)}
-            className="btn btn-danger btn-lg"
+            className="btn btn-danger btn-lg mr-1"
             href="#"
             role="button"
           >
             Delete
+          </button>
+          <button
+            onClick={() => router.push(`/movies/${movie.id}/edit`)}
+            className="btn btn-warning btn-lg"
+            href="#"
+            role="button"
+          >
+            Edit
           </button>
         </p>
       </div>
@@ -43,10 +51,10 @@ export default function Movie(props) {
         `}
       </style>
     </div>
-  )
+  );
 }
 Movie.getInitialProps = async (context) => {
-  const { id } = context.query
-  const movie = await getMovieById(id)
-  return { movie }
-}
+  const { id } = context.query;
+  const movie = await getMovieById(id);
+  return { movie };
+};
