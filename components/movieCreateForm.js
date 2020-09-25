@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-
 const MovieCreateForm = (props) => {
   const [isInitialDataLoaded, setIsInitialDataLoaded] = useState(false);
   const [form, setForm] = useState({
@@ -21,7 +20,7 @@ const MovieCreateForm = (props) => {
   const handleChange = (event) => {
     const target = event.target;
     setForm({ ...form, [target.name]: target.value });
-  };
+  }
   const handleGenreChange = (event) => {
     const { options } = event.target;
     const value = [];

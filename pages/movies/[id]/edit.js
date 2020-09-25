@@ -16,7 +16,6 @@ export default class edit extends Component {
     },
   };
   static getInitialProps({ query }) {
-    // console.log(query);
     return { ...query };
   }
   componentDidMount() {
