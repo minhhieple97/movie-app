@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { getCategories } from "../actions/index";
 const MovieCreateForm = (props) => {
   const defaultFormData = {
     name: "",
@@ -24,9 +25,9 @@ const MovieCreateForm = (props) => {
   useEffect(() => {
     if (props.initialData) {
       setForm(props.initialData);
-      setIsInitialDataLoaded(true);
+      // setIsInitialDataLoaded(true);
     }
-  }, [isInitialDataLoaded]);
+  }, []);
   const handleChange = (event) => {
     const target = event.target;
     setForm({ ...form, [target.name]: target.value });
@@ -47,7 +48,7 @@ const MovieCreateForm = (props) => {
   };
 
   const submitForm = () => {
-    props.handleCreateMovie({ ...form });
+    props.handleUpdateCreateMovie({ ...form });
   };
 
   return (
@@ -138,18 +139,23 @@ const MovieCreateForm = (props) => {
           name="genre"
           onChange={handleGenreChange}
         >
+          {/* {props.category.map(())} */}
           <option>drama</option>
           <option>music</option>
+          <option>fantasy</option>
           <option>adventure</option>
-          <option>historical</option>
+          <option>fantasy</option>
           <option>action</option>
         </select>
       </div>
       <button onClick={submitForm} type="button" className="btn btn-primary">
-        Create
+        {props.submitButton}
       </button>
     </form>
   );
 };
-
+// MovieCreateForm.getInitialProps = async () => {
+//   const categor = await getCategories();
+//   return { category };
+// };
 export default MovieCreateForm;

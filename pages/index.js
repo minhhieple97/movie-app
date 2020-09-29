@@ -1,17 +1,22 @@
-import Head from "next/head"
-import styles from "../styles/Home.module.css"
-import Navbar from "../components/navbar"
-import SideMenu from "../components/sideMenu"
-import Carousel from "../components/carousel"
-import MovieList from "../components/movieList"
-import Footer from "../components/footer"
-import { getMovies, getCategories } from "../actions"
-import { useState, useEffect } from "react"
-import Modal from "../components/modal"
+import Head from "next/head";
+import Navbar from "../components/navbar";
+import SideMenu from "../components/sideMenu";
+import Carousel from "../components/carousel";
+import MovieList from "../components/movieList";
+import { getMovies, getCategories } from "../actions";
+import { useState } from "react";
 export default function Home(props) {
-  const { movies, images, categories } = props
+  const [filter, setFilter] = useState({});
+  const [movies, setMovies] = useState(props.movies);
+  const { images, categories } = props;
+  const changeCategory = async (category) => {
+    setFilter(category);
+    const moviesUpdate = await getMovies(category.name);
+    setMovies(moviesUpdate);
+  };
+
   return (
-  <div>
+    <div>
       <Head>
         <title>Home</title>
         <link
@@ -41,10 +46,15 @@ export default function Home(props) {
         <div className="container">
           <div className="row">
             <div className="col-lg-3">
-              <SideMenu categories={categories} />
+              <SideMenu
+                activeCategory={filter}
+                changeCategory={changeCategory}
+                categories={categories}
+              />
             </div>
             <div className="col-lg-9">
               <Carousel images={images}></Carousel>
+              <h1>Displaying {filter.name || "All"} movies</h1>
               <div className="row">
                 <MovieList movies={movies || []} />
               </div>
@@ -53,22 +63,22 @@ export default function Home(props) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 Home.getInitialProps = async () => {
   try {
     const [movies, categories] = await Promise.all([
       getMovies(),
       getCategories(),
-    ])
+    ]);
     const images = movies.map((el) => ({
       id: `image-${el.id}`,
       url: el.image,
       name: el.name,
       cover: el.cover,
-    }))
-    return { movies, images, categories }
+    }));
+    return { movies, images, categories };
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};

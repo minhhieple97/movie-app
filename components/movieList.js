@@ -1,14 +1,14 @@
-import React from "react"
-import Link from "next/link"
+import React from "react";
+import Link from "next/link";
 class MovieList extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
   shorten(text, maxLength) {
     if (text && text.length > maxLength) {
-      return text.substr(0, maxLength) + "..."
+      return text.substr(0, maxLength) + "...";
     }
-    return text
+    return text;
   }
   renderMovies(movies) {
     return movies.map((movie) => (
@@ -25,7 +25,7 @@ class MovieList extends React.Component {
                 <a>{movie.name}</a>
               </Link>
             </h4>
-            <h5>$24.99</h5>
+            <strong className="movie-genre">{movie.genre}</strong>
             <p className="card-text">{this.shorten(movie.description, 200)}</p>
           </div>
           <div className="card-footer">
@@ -33,12 +33,12 @@ class MovieList extends React.Component {
           </div>
         </div>
       </div>
-    ))
+    ));
   }
   render() {
-    const { movies } = this.props
-    return <React.Fragment>{this.renderMovies(movies)}</React.Fragment>
+    const { movies } = this.props;
+    return <React.Fragment>{this.renderMovies(movies)}</React.Fragment>;
   }
 }
 
-export default MovieList
+export default MovieList;

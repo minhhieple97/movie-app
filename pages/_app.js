@@ -1,15 +1,16 @@
-import React, { Component } from "react"
-import App from "next/app"
-import Head from "next/head"
-import Navbar from "../components/navbar"
-import Footer from "../components/footer"
+import React, { Component } from "react";
+import App from "next/app";
+import Head from "next/head";
+import Navbar from "../components/navbar";
+import Footer from "../components/footer";
+import "../styles/index.scss";
 export default class MovieApp extends App {
   static async getInitialProps(appContext) {
-    const appProps = await App.getInitialProps(appContext)
-    return { ...appProps }
+    const appProps = await App.getInitialProps(appContext);
+    return { ...appProps };
   }
   render() {
-    const { Component, pageProps } = this.props
+    const { Component, pageProps } = this.props;
     return (
       <div>
         <Head>
@@ -45,10 +46,12 @@ export default class MovieApp extends App {
           {`
             .base-page {
               padding-top: 80px;
+              padding-top: 100px;
+              padding-bottom: 200px;
             }
           `}
         </style>
       </div>
-    )
+    );
   }
 }
