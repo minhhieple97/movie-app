@@ -1,16 +1,16 @@
-import React, { Component } from "react"
+import React, { Component } from "react";
 export default class modal extends Component {
   constructor(props) {
-    super(props)
-    this.closeButton = null
+    super(props);
+    this.closeButton = null;
   }
   closeModal = () => {
-    this.closeButton.click()
-  }
+    this.closeButton.click();
+  };
   submitModal = () => {
-    alert("Submititng Modal")
-    this.closeModal()
-  }
+    alert("Submititng Modal");
+    this.closeModal();
+  };
   render() {
     return (
       <div>
@@ -70,6 +70,6 @@ export default class modal extends Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
