@@ -24,8 +24,8 @@ export default class edit extends Component {
       this.setState({ movie });
     });
   }
-
   render() {
+    console.log("[Edit component render]", this.state);
     const { movie } = this.state;
     return (
       <div className="container">
